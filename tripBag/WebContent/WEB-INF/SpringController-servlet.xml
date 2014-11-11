@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--  DB설정  -->
+	<bean id="dataSourceBean" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="tripbag"/>
+		<property name="password" value="1234"/>
+	</bean>
+	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceBean"/>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:memberModel/MemberMapper.xml</value>
+				<value>classpath:afterModel/AfterMapper.xml</value>
+				<value>classpath:planModel/PlanMapper.xml</value>
+				<value>classpath:replyModel/ReplyMapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- MemberModel -->
+	<bean name="/test.do" class="testController.TestController"/>
+</beans>
